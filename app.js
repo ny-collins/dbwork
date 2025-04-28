@@ -25,7 +25,8 @@ app.use(express.json())  // Middleware to parse incoming JSON requests
 app.use('/api/recipes', notesRouter)  // Your notes router for the /api/recipes route
 
 // Handle unknown endpoints and errors at the end of the middleware stack
-app.use(middleware.unknownEndpoint)
+
 app.use(middleware.errorHandler)
+app.use(middleware.unknownEndpoint)
 
 module.exports = app

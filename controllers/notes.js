@@ -24,5 +24,33 @@ router.get('/', async (req, res) => {
   }
 })
 
+// POST route to add a new recipe
+router.post('/', async (req, res) => {
+  console.log('Received request to add a new recipe:', req.body)
+  // Log the request body for debugging
+  try {
+    const { name, chef, ingredients, prepTime, rating } = req.body
+
+    // Create a new recipe document
+    const newRecipe = new Recipe({
+      name,
+      chef,
+      ingredients,
+      prepTime,
+      rating,
+    })
+
+    // Save the recipe to the database
+    const savedRecipe = await newRecipe.save()
+
+    // Log and return the saved recipe
+    logger.info(`New recipe added: ${JSON.stringify(savedRecipe)}`)
+    res.status(201).json(savedRecipe)
+  } catch (error) {
+    logger.error(`Error adding recipe: ${error.message}`)
+    res.status(500).json({ error: 'Failed to add recipe' })
+  }
+})
+
 // Export the router to be used in app.js
 module.exports = router
