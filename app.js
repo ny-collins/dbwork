@@ -10,7 +10,7 @@ const app = express()
 // Connect to MongoDB
 mongoose
   .connect(config.MONGO_URL)
-  .then(() => logger.info('Connected to MongoDB'))
+  .then(() => logger.info('Connected to MongoDB✅'))
   .catch((error) => {
     logger.error('Error connecting to MongoDB:', error.message)
     process.exit(1) // Exit the app with an error code

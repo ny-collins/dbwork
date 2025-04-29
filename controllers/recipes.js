@@ -58,5 +58,43 @@ router.post('/', async (req, res) => {
   }
 })
 
+// PATCH route to update a recipe by ID
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const updatedRecipe = await Recipe.findByIdAndUpdate(id, updatedData, { new: true });
+
+    if (!updatedRecipe) {
+      return res.status(404).json({ error: 'Recipe not found' });
+    }
+
+    res.json(updatedRecipe);
+  } catch (error) {
+    logger.error(`Error updating recipe: ${error.message}`);
+    res.status(500).json({ error: 'Failed to update recipe' });
+  }
+});
+
+// DELETE route to delete a recipe by ID
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedRecipe = await Recipe.findByIdAndDelete(id);
+
+    if (!deletedRecipe) {
+      return res.status(404).json({ error: 'Recipe not found' });
+    }
+
+    res.status(204).end(); // No content if successfully deleted
+  } catch (error) {
+    logger.error(`Error deleting recipe: ${error.message}`);
+    res.status(500).json({ error: 'Failed to delete recipe' });
+  }
+});
+
+
 // Export the router to be used in app.js
 module.exports = router

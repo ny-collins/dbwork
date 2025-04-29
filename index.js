@@ -10,5 +10,5 @@ const formattedHost = host.replace('[', '') // Remove brackets from the host
 const server = http.createServer(app)
 
 server.listen(port, formattedHost, () => {
-  logger.info(`Server running on ${formattedHost}:${port}`)
+  logger.info(`Server running on ${formattedHost}:${port} ✅`)
 })
