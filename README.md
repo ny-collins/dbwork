@@ -14,6 +14,20 @@
 - `index.js` — Server entry point.
 - `package.json` — Project dependencies and scripts.
 
+
+
+Here's a table with more explanation:
+| File | Purpose |
+|:---|:---|
+| `app.js` | Creates the Express app, connects to MongoDB, sets up routes and middlewares. |
+| `index.js` | Starts the server on your computer (listens for requests). |
+| `controllers/notes.js` | Contains the API logic (e.g., how to get and save recipes). |
+| `models/note.js` | Defines how a "recipe" looks inside MongoDB (fields like name, chef, etc.). |
+| `utils/config.js` | Stores database connection info and port number. |
+| `utils/logger.js` | Simplified way to log info and errors to the console. |
+| `utils/middleware.js` | Contains reusable pieces for error handling and logging requests. |
+| `package.json` | Lists your project dependencies (e.g., Express, Mongoose). |
+
 ---
 
 ## 🚀 Getting Started
