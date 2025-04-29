@@ -1,108 +1,152 @@
+# 🍽️ DBWork - Recipe Management API
 
-# DBWork
+Welcome to **DBWork**, a simple and clean RESTful API for managing recipes. This project is designed as a beginner-friendly backend system using Node.js, Express, and MongoDB.
 
-> A Node.js backend project for managing database-related operations.
-
----
-
-## 📦 Project Structure
-
-- `/controllers` — Business logic for handling requests.
-- `/models` — Database schema definitions.
-- `/utils` — Helper functions and utilities.
-- `app.js` — Express app configuration.
-- `index.js` — Server entry point.
-- `package.json` — Project dependencies and scripts.
-
-
-
-Here's a table with more explanation:
-| File | Purpose |
-|:---|:---|
-| `app.js` | Creates the Express app, connects to MongoDB, sets up routes and middlewares. |
-| `index.js` | Starts the server on your computer (listens for requests). |
-| `controllers/notes.js` | Contains the API logic (e.g., how to get and save recipes). |
-| `models/note.js` | Defines how a "recipe" looks inside MongoDB (fields like name, chef, etc.). |
-| `utils/config.js` | Stores database connection info and port number. |
-| `utils/logger.js` | Simplified way to log info and errors to the console. |
-| `utils/middleware.js` | Contains reusable pieces for error handling and logging requests. |
-| `package.json` | Lists your project dependencies (e.g., Express, Mongoose). |
+> This project is perfect for learning backend development concepts like API routing, MongoDB integration, request handling, and project structure organization.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Features
 
-### Prerequisites
-- Node.js (v16+ recommended)
-- npm (comes with Node.js)
-
-### Installation
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/ny-collins/dbwork.git
-   cd dbwork
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables:
-   Create a `.env` file in the root directory and add necessary environment variables:
-   ```env
-   PORT=3000
-   DB_URI=your_database_connection_string
-   ```
-
-4. Run the server:
-   ```bash
-   npm start
-   ```
-
-   Or for development with auto-reloading:
-   ```bash
-   npm run dev
-   ```
+- Create and store recipes in a MongoDB database
+- Retrieve a list of all recipes
+- Error handling and request logging
+- Environment variable management with dotenv
+- Modular and scalable project structure
 
 ---
 
-## 📚 Usage
+## 🛠️ Technologies Used
 
-After starting the server, access the API via:
+- **Node.js** — JavaScript runtime environment
+- **Express.js** — Web framework for Node.js
+- **MongoDB** — NoSQL database
+- **Mongoose** — Elegant MongoDB object modeling
+- **dotenv** — Load environment variables securely
+- **nodemon** — Development utility to auto-restart server on changes
 
-```bash
-http://localhost:3000/
+---
+
+## 📁 Folder Structure
+
+```
+/dbwork
+ ├── controllers/
+ │    └── recipes.js      # API route handlers for recipes
+ ├── models/
+ │    └── recipe.js        # Mongoose schema for recipes
+ ├── utils/
+ │    ├── config.js        # Configuration settings (MongoDB URI, Port)
+ │    ├── logger.js        # Simple logger functions
+ │    └── middleware.js    # Middleware for logging, errors, unknown endpoints
+ ├── .env                  # Environment variables (excluded from Git)
+ ├── .gitignore
+ ├── package.json
+ ├── app.js               # Main Express application setup
+ └── index.js             # Server entry point
 ```
 
-Endpoints should be listed here (add them once you finalize).
+---
+
+## 🔑 Setup and Installation
+
+### Prerequisites
+
+- Node.js (v16 or higher recommended)
+- MongoDB Atlas Account (or local MongoDB installation)
+
+### Installation Steps
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/yourusername/dbwork.git
+cd dbwork
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables:**
+
+Create a `.env` file in the root directory and add:
+
+```env
+PORT=3000
+MONGO_URL=<your_mongodb_connection_string_here>
+```
+
+4. **Run the application:**
+
+For production:
+
+```bash
+npm start
+```
+
+For development (auto-restart on save):
+
+```bash
+npm run dev
+```
+
+Server will start at: `http://localhost:3000/`
 
 ---
 
-## 🛠️ Built With
+## 📚 API Endpoints
 
-- [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
+| Method | URL            | Description       |
+| ------ | -------------- | ----------------- |
+| GET    | `/api/recipes` | Fetch all recipes |
+| POST   | `/api/recipes` | Add a new recipe  |
+
+### Example POST request body:
+
+```json
+{
+  "name": "Spaghetti Bolognese",
+  "chef": "Gordon Ramsay",
+  "ingredients": "Spaghetti, minced meat, tomato sauce",
+  "prepTime": 45,
+  "rating": 5
+}
+```
 
 ---
 
-## 🧹 TODO
+## 🛡️ Security Tips
 
-- Add authentication (if not done yet)
-- Write unit tests
-- Set up deployment (Heroku, Render, Vercel, etc.)
+- **Always** add `.env` to your `.gitignore` to avoid leaking secrets.
+- Never hardcode database URIs or passwords inside your source code.
 
 ---
 
-## 📄 License
+## 🚀 Future Improvements
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+- Add Update and Delete (CRUD complete)
+- User authentication (JWT based)
+- Input validation using libraries like `Joi`
+- Deploy to platforms like Render, Vercel, or Heroku
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Feel free to fork this repository and submit a pull request.
 
 ---
+
+## 💬 Contact
+
+Created by Collins Mwangi - feel free to reach out!
+
