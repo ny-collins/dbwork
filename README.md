@@ -148,5 +148,5 @@ Contributions are welcome! Feel free to fork this repository and submit a pull r
 
 ## 💬 Contact
 
-Created by Collins Mwangi - feel free to reach out!
+Created by [Collins Mwangi](https://github.com/ny-collins) - feel free to reach out!
 
