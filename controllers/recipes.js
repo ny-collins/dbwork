@@ -1,5 +1,5 @@
 const express = require('express')
-const Recipe = require('../models/note') // Import the Recipe model
+const Recipe = require('../models/recipe') // Import the Recipe model
 const logger = require('../utils/logger') // Import the logger utility
 
 const router = express.Router()
@@ -30,6 +30,12 @@ router.post('/', async (req, res) => {
   // Log the request body for debugging
   try {
     const { name, chef, ingredients, prepTime, rating } = req.body
+
+    // Validate the request body
+    // Ensure that name, chef, and ingredients are provided
+    if (!name || !chef || !ingredients) {
+      return res.status(400).json({ error: 'Name, chef and ingredients are required' })
+    }
 
     // Create a new recipe document
     const newRecipe = new Recipe({
