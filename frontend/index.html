@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Recipe Manager</h1>
+
+  <!-- Form to add new recipe -->
+  <form id="recipe-form">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="chef" placeholder="Chef" required>
+    <input type="text" id="ingredients" placeholder="Ingredients" required>
+    <input type="number" id="prepTime" placeholder="Preparation Time" required>
+    <input type="number" id="rating" placeholder="Rating" required>
+    <button type="submit">Add Recipe</button>
+  </form><br>
+
+  <hr><br>
+
+  <!-- Table to display recipes -->
+  <table border="1" id="recipes-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Chef</th>
+        <th>Ingredients</th>
+        <th>Prep Time</th>
+        <th>Rating</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
