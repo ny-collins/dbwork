@@ -67,7 +67,7 @@ cd dbwork
 2. **Install dependencies:**
 
 ```bash
-npm install
+npm install mongoose mongodb dotenv express nodemon
 ```
 
 3. **Set up environment variables:**
