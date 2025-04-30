@@ -1,3 +1,5 @@
+const path = require('path')
+const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('./utils/config')
@@ -16,16 +18,20 @@ mongoose
     process.exit(1) // Exit the app with an error code
   })
 
-// Apply the requestLogger middleware first to capture all requests
-app.use(middleware.requestLogger)
+  app.use(cors());
+  app.use(express.json());           // ✅ Parse JSON body first
+  app.use(middleware.requestLogger); // ✅ Now logger sees the parsed body
+  
+app.use(express.static(path.join(__dirname, 'frontend'))) // Serve static files from the frontend directory
+
+app.use('/api/recipes', recipesRouter)  // Your recipes router for the /api/recipes route
 
 // Set up routes
 app.get('/', (request, response) => {
-  response.send('Welcome to the Recipe API! Use /api/recipes to access the recipes.')
-})
+  response.sendFile(path.join(__dirname, 'frontend', 'index.html')) // Serve the index.html file
+}
+)
 
-app.use(express.json())  // Middleware to parse incoming JSON requests
-app.use('/api/recipes', recipesRouter)  // Your recipes router for the /api/recipes route
 
 // Handle unknown endpoints and errors at the end of the middleware stack
 

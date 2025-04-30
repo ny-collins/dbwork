@@ -1,19 +1,17 @@
 const logger = require('./logger')
 
 const requestLogger = (req, res, next) => {
-  logger.info(`Method: ${req.method}`)
-  logger.info(`Path:   ${req.path}`)
-  
-  // Safely check if req.body exists and has keys
+  logger.info('--- Incoming Request ---');
+  logger.info(`Method: ${req.method}`);
+  logger.info(`Path:   ${req.path}`);
   if (req.body && Object.keys(req.body).length > 0) {
-    logger.info(`Body:   ${JSON.stringify(req.body)}`)
-  } else {
-    logger.info('Body:   (empty)')
-  }
-  
-  logger.info('---')
-  next()
+    logger.info('Body:',   JSON.stringify(req.body, null, 2));
+  } 
+
+  logger.info('------------------------');
+  next();
 }
+
 
 // Middleware to handle unknown endpoints
 // This middleware should be placed after all other routes

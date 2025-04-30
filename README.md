@@ -1,29 +1,35 @@
 # 🍽️ DBWork - Recipe Management API
 
-Welcome to **DBWork**, a simple and clean RESTful API for managing recipes. This project is designed as a beginner-friendly backend system using Node.js, Express, and MongoDB.
+Welcome to **DBWork**, a simple and clean RESTful API for managing recipes. This project is designed as a beginner-friendly full-stack app using Node.js, Express, MongoDB, and a lightweight HTML/CSS/JavaScript frontend.
 
-> This project is perfect for learning backend development concepts like API routing, MongoDB integration, request handling, and project structure organization.
+> This project is perfect for learning backend development, API design, and how to connect frontends to backends using real-world practices.
 
 ---
 
 ## 🚀 Features
 
-- Create and store recipes in a MongoDB database
-- Retrieve a list of all recipes
-- Error handling and request logging
-- Environment variable management with dotenv
-- Modular and scalable project structure
+- Full CRUD operations (Create, Read, Update, Delete)
+- MongoDB database with Mongoose schema
+- Express backend with structured controllers and middleware
+- Frontend using plain HTML/CSS/JavaScript
+- Live reload support using nodemon
+- CORS enabled for safe frontend-backend communication
+- Modern, responsive UI styling
+- Logger middleware that cleanly prints request method, path, and body
+- Static homepage served directly from Express
 
 ---
 
 ## 🛠️ Technologies Used
 
 - **Node.js** — JavaScript runtime environment
-- **Express.js** — Web framework for Node.js
-- **MongoDB** — NoSQL database
-- **Mongoose** — Elegant MongoDB object modeling
-- **dotenv** — Load environment variables securely
-- **nodemon** — Development utility to auto-restart server on changes
+- **Express.js** — Backend web framework
+- **MongoDB Atlas** — Cloud NoSQL database
+- **Mongoose** — Object modeling for MongoDB
+- **dotenv** — Securely store credentials
+- **cors** — Cross-origin request support
+- **nodemon** — Auto-restarts the server during development
+- **Vanilla JS + HTML + CSS** — Clean and modern UI
 
 ---
 
@@ -31,122 +37,163 @@ Welcome to **DBWork**, a simple and clean RESTful API for managing recipes. This
 
 ```
 /dbwork
- ├── controllers/
- │    └── recipes.js      # API route handlers for recipes
- ├── models/
- │    └── recipe.js        # Mongoose schema for recipes
- ├── utils/
- │    ├── config.js        # Configuration settings (MongoDB URI, Port)
- │    ├── logger.js        # Simple logger functions
- │    └── middleware.js    # Middleware for logging, errors, unknown endpoints
- ├── .env                  # Environment variables (excluded from Git)
- ├── .gitignore
- ├── package.json
- ├── app.js               # Main Express application setup
- └── index.js             # Server entry point
+├── controllers/           # Route logic
+├── models/                # Mongoose schema
+├── utils/                 # Config, logger, middleware
+├── frontend/              # HTML, CSS, JavaScript client
+│   ├── index.html         # Recipe Manager UI
+│   ├── script.js          # Frontend JS logic
+│   └── style.css          # UI styling
+├── app.js                 # Express app with static file serving
+├── index.js               # Server entry
+├── package.json           # Dependencies and scripts
+├── .env                   # Environment variables (not committed)
+└── .gitignore             # Files to exclude from git
 ```
 
 ---
 
-## 🔑 Setup and Installation
+## 🔧 Setup Instructions
 
 ### Prerequisites
+- Node.js installed
+- MongoDB Atlas or local MongoDB setup
 
-- Node.js (v16 or higher recommended)
-- MongoDB Atlas Account (or local MongoDB installation)
-
-### Installation Steps
-
-1. **Clone the repository:**
-
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/yourusername/dbwork.git
 cd dbwork
 ```
 
-2. **Install dependencies:**
-
+### 2. Install Backend Dependencies
 ```bash
-npm install mongoose mongodb dotenv express nodemon
+npm install
 ```
 
-3. **Set up environment variables:**
-
-Create a `.env` file in the root directory and add:
-
+### 3. Configure Environment Variables
+Create a `.env` file in the root directory:
 ```env
-PORT=3000
-MONGO_URL=<your_mongodb_connection_string_here>
+PORT=[::1]:3003
+MONGO_URL=your_mongodb_connection_string_here
 ```
 
-4. **Run the application:**
-
-For production:
-
-```bash
-npm start
-```
-
-For development (auto-restart on save):
-
+### 4. Start the Server
 ```bash
 npm run dev
 ```
+Your server will run on:
+```
+http://[::1]:3003
+```
 
-Server will start at: `http://localhost:3000/`
+---
+
+## 🖥️ Frontend Access
+
+Once the server is running, simply visit:
+```
+http://[::1]:3003/
+```
+You will land on the **Recipe Manager UI**, served directly by Express.
+
+The frontend interacts live with the backend API at:
+```
+http://[::1]:3003/api/recipes
+```
 
 ---
 
 ## 📚 API Endpoints
 
-| Method | URL            | Description       |
-| ------ | -------------- | ----------------- |
-| GET    | `/api/recipes` | Fetch all recipes |
-| POST   | `/api/recipes` | Add a new recipe  |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET    | `/api/recipes`       | Get all recipes |
+| POST   | `/api/recipes`       | Add a new recipe |
+| PATCH  | `/api/recipes/:id`   | Update a recipe |
+| DELETE | `/api/recipes/:id`   | Delete a recipe |
 
-### Example POST request body:
-
+### Example POST Request Body:
 ```json
 {
-  "name": "Spaghetti Bolognese",
-  "chef": "Gordon Ramsay",
-  "ingredients": "Spaghetti, minced meat, tomato sauce",
-  "prepTime": 45,
+  "name": "Pancakes",
+  "chef": "Chef Collins",
+  "ingredients": "Flour, Eggs, Milk",
+  "prepTime": 20,
   "rating": 5
 }
 ```
 
 ---
 
-## 🛡️ Security Tips
-
-- **Always** add `.env` to your `.gitignore` to avoid leaking secrets.
-- Never hardcode database URIs or passwords inside your source code.
+## 🎨 Frontend Features
+- Beautiful form for adding recipes
+- Responsive table displaying recipe list
+- Delete button per row (more actions coming)
+- Styled using clean `style.css`
+- Fully integrated with backend via Fetch API
 
 ---
 
-## 🚀 Future Improvements
+## 📦 Middleware Features
 
-- Add Update and Delete (CRUD complete)
-- User authentication (JWT based)
-- Input validation using libraries like `Joi`
-- Deploy to platforms like Render, Vercel, or Heroku
+### Logger
+Logs each request with clean formatting:
+```
+--- Incoming Request ---
+Method: POST
+Path:   /api/recipes
+Body: {
+  "name": "Chapati",
+  "chef": "Chef Amina"
+}
+------------------------
+```
+
+### Error Handling
+Returns structured JSON errors for:
+- Unknown endpoints
+- Validation issues
+- Malformed Mongo IDs
+
+---
+
+## 🧠 Learning Highlights
+- Serve static frontend from Express
+- Use of CORS for cross-origin frontend access
+- Environment variable loading with `.env`
+- Middleware: custom logging and error handling
+- RESTful API design and structure
+
+---
+
+## 🛡️ Security
+- `.env` is ignored via `.gitignore` to prevent secrets from leaking
+- CORS is explicitly enabled for safe frontend access
+
+---
+
+## 🧹 Future Improvements
+- Edit/update buttons in UI
+- User authentication (login, tokens)
+- Pagination and search filters
+- Hosting backend + frontend on Render or Vercel
+- Better form validation and error messages
 
 ---
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
+Pull requests are welcome! If you want to add features or fix bugs, feel free to fork the project and submit your changes.
 
 ---
 
-## 💬 Contact
+## 🙌 Acknowledgments
 
-Created by [Collins Mwangi](https://github.com/ny-collins) - feel free to reach out!
+Built with ❤️ by Collins with guidance from ChatGPT.
 
