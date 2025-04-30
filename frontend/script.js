@@ -5,52 +5,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const tableBody = document.querySelector('#recipeTable tbody');
 
   const loadRecipes = async () => {
-    const res = await fetch(API_URL);
-    const recipes = await res.json();
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error(`API error: ${res.status}`);
+      const recipes = await res.json();
 
-    tableBody.innerHTML = '';
-    recipes.forEach(recipe => {
-      const tr = document.createElement('tr');
+      tableBody.innerHTML = '';
+      recipes.forEach(recipe => {
+        console.log('Loading recipe:', recipe); // Debug log
 
-      const td1 = document.createElement('td');
-      td1.textContent = recipe.name;
-      td1.setAttribute('data-label', 'Name');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td data-label="Name">${recipe.name}</td>
+          <td data-label="Chef">${recipe.chef}</td>
+          <td data-label="Ingredients">${recipe.ingredients}</td>
+          <td data-label="Prep Time">${recipe.prepTime}</td>
+          <td data-label="Rating">${recipe.rating}</td>
+          <td data-label="Actions">
+            <div class="action-wrapper">
+              <button onclick="deleteRecipe('${recipe._id}')">Delete</button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    } catch (error) {
+      console.error('Error loading recipes:', error);
+    }
+  };
 
-      const td2 = document.createElement('td');
-      td2.textContent = recipe.chef;
-      td2.setAttribute('data-label', 'Chef');
+  const deleteRecipe = async (recipeId) => {
+    if (!recipeId) {
+      console.error('Invalid recipe ID');
+      return;
+    }
 
-      const td3 = document.createElement('td');
-      td3.textContent = recipe.ingredients;
-      td3.setAttribute('data-label', 'Ingredients');
-
-      const td4 = document.createElement('td');
-      td4.textContent = recipe.prepTime;
-      td4.setAttribute('data-label', 'Prep Time');
-
-      const td5 = document.createElement('td');
-      td5.textContent = recipe.rating;
-      td5.setAttribute('data-label', 'Rating');
-
-      const td6 = document.createElement('td');
-      td6.setAttribute('data-label', 'Actions');
-
-      const actionWrapper = document.createElement('div');
-      actionWrapper.className = 'action-wrapper';
-
-      const delBtn = document.createElement('button');
-      delBtn.textContent = 'Delete';
-      delBtn.onclick = async () => {
-        await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
-        loadRecipes();
-      };
-
-      actionWrapper.appendChild(delBtn);
-      td6.appendChild(actionWrapper);
-
-      tr.append(td1, td2, td3, td4, td5, td6);
-      tableBody.appendChild(tr);
-    });
+    try {
+      await fetch(`${API_URL}/${recipeId}`, { method: 'DELETE' });
+      console.log(`Recipe ${recipeId} deleted successfully`);
+      loadRecipes();
+    } catch (error) {
+      console.error('Error deleting recipe:', error);
+    }
   };
 
   form.addEventListener('submit', async e => {
@@ -65,14 +61,25 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: Number(formData.get('rating')),
     };
 
-    await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRecipe),
-    });
+    if (isNaN(newRecipe.prepTime) || isNaN(newRecipe.rating)) {
+      alert('Preparation time and rating must be numbers.');
+      return;
+    }
 
-    form.reset();
-    loadRecipes();
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRecipe),
+      });
+
+      if (!res.ok) throw new Error(`API error: ${res.status}`);
+      console.log('Recipe added successfully');
+      form.reset();
+      loadRecipes();
+    } catch (error) {
+      console.error('Error adding recipe:', error);
+    }
   });
 
   loadRecipes();
