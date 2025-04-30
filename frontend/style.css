@@ -50,6 +50,7 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: auto; /* Prevent full width buttons unless needed */
 }
 
 button:hover {
@@ -97,7 +98,7 @@ th, td {
   }
 }
 
-/* Full mobile stacked layout */
+/* Mobile stacked layout */
 @media screen and (max-width: 600px) {
   table, thead, tbody, th, td, tr {
     display: block;
@@ -134,8 +135,12 @@ th, td {
     color: #555;
   }
 
-  button {
-    margin-top: 10px;
-    width: 100%;
+  td button {
+    display: block;
+    width: 90%;
+    margin: 10px auto 0;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
   }
 }
