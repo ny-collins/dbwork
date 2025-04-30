@@ -1,27 +1,48 @@
 body {
   font-family: sans-serif;
   margin: 20px;
+  background-color: #f5f7fa;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
 }
 
 form {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 input[type="text"],
 input[type="number"] {
-  padding: 8px;
+  padding: 10px;
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline-color: royalblue;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px;
   background-color: royalblue;
   color: white;
   border: none;
+  border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2e59d9;
 }
 
 /* Container for horizontal scrolling */
@@ -34,19 +55,27 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
-  min-width: 600px; /* ensures scroll kicks in on small devices */
+  min-width: 600px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+th {
+  background-color: #f0f0f0;
 }
 
 th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   text-align: left;
 }
 
+/* Tablets and small screens */
 @media (max-width: 768px) {
   form {
-    flex-direction: column;
-    gap: 10px;
+    padding: 15px;
   }
 
   input, button {
@@ -54,24 +83,50 @@ th, td {
     font-size: 1rem;
   }
 
-  button {
-    padding: 10px;
-  }
-
   table {
     font-size: 14px;
   }
 }
 
+/* Mobile layout with stacked rows */
 @media (max-width: 480px) {
-  button {
+  table, thead, tbody, th, td, tr {
+    display: block;
     width: 100%;
-    font-size: 14px;
-    padding: 6px;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
   td {
+    position: relative;
+    padding-left: 50%;
+    border: none;
+    border-bottom: 1px solid #eee;
     word-wrap: break-word;
     white-space: normal;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  button {
+    margin-top: 10px;
+    width: 100%;
   }
 }
