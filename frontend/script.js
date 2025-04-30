@@ -1,4 +1,4 @@
-const API_URL = 'http://[::1]:3003/api/recipes';
+const API_URL = 'https://dbwork-api.onrender.com/api/recipes';
 
 const form = document.getElementById('recipe-form');
 const tableBody = document.querySelector('#recipes-table tbody');
