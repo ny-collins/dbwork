@@ -34,13 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const td6 = document.createElement('td');
       td6.setAttribute('data-label', 'Actions');
+
+      const actionWrapper = document.createElement('div');
+      actionWrapper.className = 'action-wrapper';
+
       const delBtn = document.createElement('button');
       delBtn.textContent = 'Delete';
       delBtn.onclick = async () => {
         await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
         loadRecipes();
       };
-      td6.appendChild(delBtn);
+
+      actionWrapper.appendChild(delBtn);
+      td6.appendChild(actionWrapper);
 
       tr.append(td1, td2, td3, td4, td5, td6);
       tableBody.appendChild(tr);

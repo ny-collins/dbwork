@@ -50,14 +50,18 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: auto; /* Prevent full width buttons unless needed */
+  width: auto;
 }
 
 button:hover {
   background-color: #2e59d9;
 }
 
-/* Scroll container */
+.action-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .table-container {
   overflow-x: auto;
   width: 100%;
@@ -83,7 +87,6 @@ th, td {
   text-align: left;
 }
 
-/* Tablets */
 @media screen and (max-width: 768px) {
   form {
     padding: 15px;
@@ -98,7 +101,6 @@ th, td {
   }
 }
 
-/* Mobile stacked layout */
 @media screen and (max-width: 600px) {
   table, thead, tbody, th, td, tr {
     display: block;
@@ -135,12 +137,11 @@ th, td {
     color: #555;
   }
 
-  td button {
-    display: block;
-    width: 90%;
-    margin: 10px auto 0;
-    padding: 10px;
+  .action-wrapper button {
+    width: 100%;
+    margin-top: 10px;
     font-size: 1rem;
+    padding: 10px;
     border-radius: 5px;
   }
 }
