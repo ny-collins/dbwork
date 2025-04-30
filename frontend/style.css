@@ -7,6 +7,13 @@ body {
 h1 {
   text-align: center;
   color: #333;
+  margin-bottom: 10px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
 }
 
 form {
@@ -14,7 +21,7 @@ form {
   flex-direction: column;
   gap: 10px;
   max-width: 400px;
-  margin: 0 auto 20px;
+  margin: 0 auto 10px;
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
@@ -72,7 +79,7 @@ th, td {
   text-align: left;
 }
 
-/* Tablets and small screens */
+/* Tablets */
 @media (max-width: 768px) {
   form {
     padding: 15px;
