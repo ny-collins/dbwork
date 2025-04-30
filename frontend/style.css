@@ -24,10 +24,17 @@ button {
   cursor: pointer;
 }
 
+/* Container for horizontal scrolling */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
+  min-width: 600px; /* ensures scroll kicks in on small devices */
 }
 
 th, td {
@@ -57,35 +64,14 @@ th, td {
 }
 
 @media (max-width: 480px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
+  button {
     width: 100%;
-  }
-
-  thead {
-    display: none;
-  }
-
-  tr {
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 10px;
-    background: #f9f9f9;
+    font-size: 14px;
+    padding: 6px;
   }
 
   td {
-    position: relative;
-    padding-left: 50%;
-    border: none;
-    border-bottom: 1px solid #eee;
-  }
-
-  td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-weight: bold;
+    word-wrap: break-word;
+    white-space: normal;
   }
 }
