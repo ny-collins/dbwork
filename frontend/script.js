@@ -1,61 +1,73 @@
 const API_URL = 'https://dbwork-api.onrender.com/api/recipes';
 
-const form = document.getElementById('recipe-form');
-const tableBody = document.querySelector('#recipes-table tbody');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('form');
+  const tableBody = document.querySelector('#recipeTable tbody');
 
-// Load all recipes
-async function loadRecipes() {
-  const res = await fetch(API_URL);
-  const recipes = await res.json();
+  const loadRecipes = async () => {
+    const res = await fetch(API_URL);
+    const recipes = await res.json();
 
-  tableBody.innerHTML = '';
-  recipes.forEach(recipe => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${recipe.name}</td>
-      <td>${recipe.chef}</td>
-      <td>${recipe.ingredients}</td>
-      <td>${recipe.prepTime} min</td>
-      <td>${recipe.rating}</td>
-      <td>
-        <button onclick="deleteRecipe('${recipe._id}')">Delete</button>
-      </td>
-    `;
-    tableBody.appendChild(row);
-  });
-}
+    tableBody.innerHTML = '';
+    recipes.forEach(recipe => {
+      const tr = document.createElement('tr');
 
-// Add new recipe
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+      const td1 = document.createElement('td');
+      td1.textContent = recipe.name;
+      td1.setAttribute('data-label', 'Name');
 
-  const newRecipe = {
-    name: document.getElementById('name').value,
-    chef: document.getElementById('chef').value,
-    ingredients: document.getElementById('ingredients').value,
-    prepTime: Number(document.getElementById('prepTime').value),
-    rating: Number(document.getElementById('rating').value),
+      const td2 = document.createElement('td');
+      td2.textContent = recipe.chef;
+      td2.setAttribute('data-label', 'Chef');
+
+      const td3 = document.createElement('td');
+      td3.textContent = recipe.ingredients;
+      td3.setAttribute('data-label', 'Ingredients');
+
+      const td4 = document.createElement('td');
+      td4.textContent = recipe.prepTime;
+      td4.setAttribute('data-label', 'Prep Time');
+
+      const td5 = document.createElement('td');
+      td5.textContent = recipe.rating;
+      td5.setAttribute('data-label', 'Rating');
+
+      const td6 = document.createElement('td');
+      td6.setAttribute('data-label', 'Actions');
+      const delBtn = document.createElement('button');
+      delBtn.textContent = 'Delete';
+      delBtn.onclick = async () => {
+        await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
+        loadRecipes();
+      };
+      td6.appendChild(delBtn);
+
+      tr.append(td1, td2, td3, td4, td5, td6);
+      tableBody.appendChild(tr);
+    });
   };
 
-  await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(newRecipe),
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const newRecipe = {
+      name: formData.get('name'),
+      chef: formData.get('chef'),
+      ingredients: formData.get('ingredients'),
+      prepTime: Number(formData.get('prepTime')),
+      rating: Number(formData.get('rating')),
+    };
+
+    await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newRecipe),
+    });
+
+    form.reset();
+    loadRecipes();
   });
 
-  form.reset();
   loadRecipes();
 });
-
-// Delete recipe
-async function deleteRecipe(id) {
-  await fetch(`${API_URL}/${id}`, {
-    method: 'DELETE',
-  });
-  loadRecipes();
-}
-
-// Load recipes initially
-loadRecipes();

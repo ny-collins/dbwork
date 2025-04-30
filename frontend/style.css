@@ -1,128 +1,95 @@
+/* Base styling */
 body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #444;
-  }
-  
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: royalblue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Responsive layout for tablets */
+@media (max-width: 768px) {
   form {
-    display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
-    justify-content: center;
-    margin-bottom: 30px;
-  }
-  
-  input[type="text"],
-  input[type="number"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    padding: 8px 12px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    background-color: white;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #f1f1f1;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
   }
 
-  @media (max-width: 768px) {
-    form {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-    }
-  
-    table {
-      font-size: 14px;
-    }
-  
-    th, td {
-      padding: 6px;
-    }
-  
-    button {
-      width: 100%;
-      margin-top: 5px;
-    }
+  input, button {
+    width: 100%;
+    font-size: 1rem;
   }
-  
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.5em;
-    }
-  
-    table, thead, tbody, th, td, tr {
-      display: block;
-      width: 100%;
-    }
-  
-    thead {
-      display: none;
-    }
-  
-    tr {
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-  
-    td {
-      text-align: right;
-      position: relative;
-      padding-left: 50%;
-    }
-  
-    td::before {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      white-space: nowrap;
-      font-weight: bold;
-    }
-  
-    td:nth-child(1)::before { content: "Name"; }
-    td:nth-child(2)::before { content: "Chef"; }
-    td:nth-child(3)::before { content: "Ingredients"; }
-    td:nth-child(4)::before { content: "Prep Time"; }
-    td:nth-child(5)::before { content: "Rating"; }
-    td:nth-child(6)::before { content: "Actions"; }
+
+  button {
+    padding: 10px;
   }
-    
+
+  table {
+    font-size: 14px;
+  }
+}
+
+/* Mobile layout: stacked cards */
+@media (max-width: 480px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    background: #f9f9f9;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: bold;
+  }
+}
