@@ -57,25 +57,28 @@ button:hover {
   background-color: #2e59d9;
 }
 
+/* Action button styling */
 .action-wrapper {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Ensures buttons wrap when needed */
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .action-wrapper button {
-  width: 100%;
-  max-width: 120px;
+  max-width: 100px;
+  width: auto;
+  padding: 8px;
 }
 
-/* Fix delete button alignment on mobile */
+/* Ensuring action buttons align properly */
 td[data-label="Actions"] {
   text-align: center;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-/* Table styling */
 .table-container {
   overflow-x: auto;
   width: 100%;
@@ -101,7 +104,7 @@ th, td {
   text-align: left;
 }
 
-/* Responsive fixes */
+/* Responsive styling */
 @media screen and (max-width: 768px) {
   form {
     padding: 15px;
@@ -152,10 +155,19 @@ th, td {
     color: #555;
   }
 
-  /* Ensuring action buttons fit inside mobile view */
+  /* Ensuring buttons fit inside mobile view */
+  .action-wrapper {
+    display: block;
+    text-align: center;
+  }
+
   .action-wrapper button {
     width: 100%;
     max-width: 90px;
     padding: 8px;
+  }
+
+  td[data-label="Actions"] {
+    justify-content: center;
   }
 }
