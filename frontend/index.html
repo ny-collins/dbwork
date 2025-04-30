@@ -3,32 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Recipe Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="DBWork" />
   <link rel="manifest" href="/site.webmanifest" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <h1>Recipe Manager</h1>
 
-  <!-- Form to add new recipe -->
   <form id="recipe-form">
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="text" id="chef" placeholder="Chef" required>
-    <input type="text" id="ingredients" placeholder="Ingredients" required>
-    <input type="number" id="prepTime" placeholder="Preparation Time" required>
-    <input type="number" id="rating" placeholder="Rating" required>
+    <input type="text" id="name" name="name" placeholder="Name" required>
+    <input type="text" id="chef" name="chef" placeholder="Chef" required>
+    <input type="text" id="ingredients" name="ingredients" placeholder="Ingredients" required>
+    <input type="number" id="prepTime" name="prepTime" placeholder="Preparation Time" required>
+    <input type="number" id="rating" name="rating" placeholder="Rating" required>
     <button type="submit">Add Recipe</button>
   </form><br>
 
   <hr><br>
 
-  <!-- Table to display recipes -->
-  <table border="1" id="recipes-table">
+  <table border="1" id="recipeTable">
     <thead>
       <tr>
         <th>Name</th>

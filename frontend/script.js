@@ -1,7 +1,7 @@
 const API_URL = 'https://dbwork-api.onrender.com/api/recipes';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('form');
+  const form = document.querySelector('#recipe-form');
   const tableBody = document.querySelector('#recipeTable tbody');
 
   const loadRecipes = async () => {
