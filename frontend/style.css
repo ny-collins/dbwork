@@ -130,4 +130,20 @@ th, td {
     margin-top: 10px;
     box-sizing: border-box;
   }
+
+  /* ✅ Specific fix for Delete button alignment */
+  td[data-label="Actions"] {
+    padding-left: 10px;
+  }
+
+  td[data-label="Actions"]::before {
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td[data-label="Actions"] button {
+    width: 100%;
+    display: block;
+    margin-top: 0;
+  }
 }
