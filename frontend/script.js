@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result.isConfirmed) {
           await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
-          loadRecipes();
+          await loadRecipes();
 
           Swal.fire({
             title: 'Deleted!',
@@ -60,14 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       tdActions.appendChild(delBtn);
       tr.appendChild(tdActions);
-
       tableBody.appendChild(tr);
     });
   };
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    spinner.style.display = 'block'; // Show spinner
+    spinner.style.display = 'block';
 
     const formData = new FormData(form);
     const newRecipe = {
@@ -79,18 +78,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      await fetch(API_URL, {
+      const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRecipe),
       });
 
+      if (!res.ok) throw new Error('Failed to save recipe.');
+
       form.reset();
       await loadRecipes();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Recipe Added',
+        text: 'Your recipe was successfully saved!',
+        timer: 2000,
+        showConfirmButton: false
+      });
     } catch (err) {
-      console.error('Failed to submit recipe:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: 'Something went wrong while saving your recipe. Please try again.',
+      });
     } finally {
-      spinner.style.display = 'none'; // Hide spinner
+      spinner.style.display = 'none';
     }
   });
 
