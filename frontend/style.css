@@ -82,7 +82,7 @@ th, td {
   text-align: left;
 }
 
-/* ✅ Mobile Responsive Styles */
+/* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   thead {
     display: none;
@@ -131,24 +131,33 @@ th, td {
     box-sizing: border-box;
   }
 
-  /* ✅ Specific fix for Delete button alignment */
+  /* Specific fix for the Actions cell */
   td[data-label="Actions"] {
     padding-left: 10px;
+    padding-top: 30px;
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
   }
 
   td[data-label="Actions"]::before {
-    top: 12px;
-    left: 10px;
+    content: "Actions";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
     font-weight: bold;
-    white-space: nowrap;
-    width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #333;
   }
 
   td[data-label="Actions"] button {
-    width: 100%;
-    display: block;
-    margin-top: 0;
+    display: inline-block;
+    margin-top: 5px;
+    width: 90%;
+    max-width: 300px;
+    padding: 12px;
+    font-size: 1rem;
   }
 }
