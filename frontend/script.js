@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     recipes.forEach(recipe => {
       const tr = document.createElement('tr');
 
-      tr.appendChild(createCell('Name', recipe.name));
-      tr.appendChild(createCell('Chef', recipe.chef));
+      tr.appendChild(createCell('Name of Dish', recipe.name));
+      tr.appendChild(createCell("Chef's Name", recipe.chef));
       tr.appendChild(createCell('Ingredients', recipe.ingredients));
-      tr.appendChild(createCell('Prep Time', recipe.prepTime));
-      tr.appendChild(createCell('Rating', recipe.rating));
+      tr.appendChild(createCell('Prep Time', `${recipe.prepTime} min`));
+      tr.appendChild(createCell('Rating', `${recipe.rating}/10`));
 
       const tdActions = document.createElement('td');
       tdActions.setAttribute('data-label', 'Actions');
@@ -32,9 +32,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const delBtn = document.createElement('button');
       delBtn.textContent = 'Delete';
       delBtn.onclick = async () => {
-        await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
-        loadRecipes();
+        const result = await Swal.fire({
+          title: 'Delete Recipe?',
+          text: "Are you sure you want to delete this recipe?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'Cancel'
+        });
+      
+        if (result.isConfirmed) {
+          await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
+          loadRecipes();
+      
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'The recipe has been deleted.',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        }
       };
+      
+      
 
       tdActions.appendChild(delBtn);
       tr.appendChild(tdActions);

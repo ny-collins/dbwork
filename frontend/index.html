@@ -10,16 +10,17 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <h1>Recipe Manager</h1>
 
   <form id="recipe-form">
-    <input type="text" id="name" name="name" placeholder="Name" required>
-    <input type="text" id="chef" name="chef" placeholder="Chef" required>
+    <input type="text" id="name" name="name" placeholder="Name of Dish" required>
+    <input type="text" id="chef" name="chef" placeholder="Chef's Name" required>
     <input type="text" id="ingredients" name="ingredients" placeholder="Ingredients" required>
-    <input type="number" id="prepTime" name="prepTime" placeholder="Preparation Time" required>
-    <input type="number" id="rating" name="rating" placeholder="Rating" required>
+    <input type="number" name="prepTime" placeholder="Preparation Time (min)" min="0" step="0.1" />
+    <input type="number" name="rating" placeholder="Rating (0-10)" min="0" max="10" step="1" />
     <button type="submit">Add Recipe</button>
   </form>
 
