@@ -19,7 +19,7 @@ hr {
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Increased gap for better spacing */
+  gap: 15px;
   max-width: 400px;
   margin: 0 auto 10px;
   padding: 20px;
@@ -42,7 +42,7 @@ input[type="number"] {
 }
 
 button {
-  padding: 15px; /* Increased padding for better touch targets */
+  padding: 15px;
   background-color: royalblue;
   color: white;
   border: none;
@@ -87,62 +87,39 @@ th, td {
   text-align: left;
 }
 
+/* ✅ Mobile Responsive Enhancements */
 @media screen and (max-width: 768px) {
   form {
-    padding: 15px;
+    padding: 10px;
   }
 
-  input, button {
+  button {
+    width: 100%;
     font-size: 1rem;
   }
 
-  table {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 600px) {
   table, thead, tbody, th, td, tr {
     display: block;
     width: 100%;
   }
 
-  thead {
-    display: none;
-  }
-
   tr {
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background: #fff;
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
   }
 
-  td {
-    position: relative;
+  td, th {
+    text-align: right;
     padding-left: 50%;
-    border: none;
-    border-bottom: 1px solid #eee;
-    word-wrap: break-word;
-    white-space: normal;
-    padding: 15px; /* Increased padding for better touch targets */
+    position: relative;
   }
 
-  td::before {
+  td::before, th::before {
     content: attr(data-label);
     position: absolute;
-    left: 10px;
-    top: 12px;
+    left: 0;
+    width: 45%;
+    padding-left: 15px;
     font-weight: bold;
-    color: #555;
-  }
-
-  .action-wrapper button {
-    width: 100%;
-    margin-top: 10px;
-    font-size: 1rem;
-    padding: 15px; /* Increased padding for better touch targets */
-    border-radius: 5px;
+    text-align: left;
   }
 }
