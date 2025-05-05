@@ -57,11 +57,6 @@ button:hover {
   background-color: #2e59d9;
 }
 
-.action-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
 .table-container {
   overflow-x: auto;
   width: 100%;
@@ -87,7 +82,7 @@ th, td {
   text-align: left;
 }
 
-/* ✅ Mobile Responsive Enhancements */
+/* ✅ Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   thead {
     display: none;
@@ -131,7 +126,8 @@ th, td {
 
   td button {
     width: 100%;
+    display: block;
     margin-top: 10px;
+    box-sizing: border-box;
   }
 }
-

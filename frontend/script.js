@@ -29,9 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const tdActions = document.createElement('td');
       tdActions.setAttribute('data-label', 'Actions');
 
-      const wrapper = document.createElement('div');
-      wrapper.className = 'action-wrapper';
-
       const delBtn = document.createElement('button');
       delBtn.textContent = 'Delete';
       delBtn.onclick = async () => {
@@ -39,8 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadRecipes();
       };
 
-      wrapper.appendChild(delBtn);
-      tdActions.appendChild(wrapper);
+      tdActions.appendChild(delBtn);
       tr.appendChild(tdActions);
 
       tableBody.appendChild(tr);
