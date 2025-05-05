@@ -3,6 +3,7 @@ const API_URL = 'https://dbwork-api.onrender.com/api/recipes';
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('#recipe-form');
   const tableBody = document.querySelector('#recipeTable tbody');
+  const spinner = document.getElementById('loading-spinner');
 
   const createCell = (label, value) => {
     const td = document.createElement('td');
@@ -42,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'Cancel'
         });
-      
+
         if (result.isConfirmed) {
           await fetch(`${API_URL}/${recipe._id}`, { method: 'DELETE' });
           loadRecipes();
-      
+
           Swal.fire({
             title: 'Deleted!',
             text: 'The recipe has been deleted.',
@@ -56,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       };
-      
-      
 
       tdActions.appendChild(delBtn);
       tr.appendChild(tdActions);
@@ -68,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
+    spinner.style.display = 'block'; // Show spinner
 
     const formData = new FormData(form);
     const newRecipe = {
@@ -78,14 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: Number(formData.get('rating')),
     };
 
-    await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRecipe),
-    });
+    try {
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRecipe),
+      });
 
-    form.reset();
-    loadRecipes();
+      form.reset();
+      await loadRecipes();
+    } catch (err) {
+      console.error('Failed to submit recipe:', err);
+    } finally {
+      spinner.style.display = 'none'; // Hide spinner
+    }
   });
 
   loadRecipes();
