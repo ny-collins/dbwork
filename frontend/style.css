@@ -137,8 +137,13 @@ th, td {
   }
 
   td[data-label="Actions"]::before {
-    top: -9999px;
-    left: -9999px;
+    top: 12px;
+    left: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+    width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   td[data-label="Actions"] button {
