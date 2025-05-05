@@ -4,39 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('#recipe-form');
   const tableBody = document.querySelector('#recipeTable tbody');
 
+  const createCell = (label, value) => {
+    const td = document.createElement('td');
+    td.textContent = value;
+    td.setAttribute('data-label', label);
+    return td;
+  };
+
   const loadRecipes = async () => {
     const res = await fetch(API_URL);
     const recipes = await res.json();
 
     tableBody.innerHTML = '';
+
     recipes.forEach(recipe => {
       const tr = document.createElement('tr');
 
-      const td1 = document.createElement('td');
-      td1.textContent = recipe.name;
-      td1.setAttribute('data-label', 'Name');
+      tr.appendChild(createCell('Name', recipe.name));
+      tr.appendChild(createCell('Chef', recipe.chef));
+      tr.appendChild(createCell('Ingredients', recipe.ingredients));
+      tr.appendChild(createCell('Prep Time', recipe.prepTime));
+      tr.appendChild(createCell('Rating', recipe.rating));
 
-      const td2 = document.createElement('td');
-      td2.textContent = recipe.chef;
-      td2.setAttribute('data-label', 'Chef');
+      const tdActions = document.createElement('td');
+      tdActions.setAttribute('data-label', 'Actions');
 
-      const td3 = document.createElement('td');
-      td3.textContent = recipe.ingredients;
-      td3.setAttribute('data-label', 'Ingredients');
-
-      const td4 = document.createElement('td');
-      td4.textContent = recipe.prepTime;
-      td4.setAttribute('data-label', 'Prep Time');
-
-      const td5 = document.createElement('td');
-      td5.textContent = recipe.rating;
-      td5.setAttribute('data-label', 'Rating');
-
-      const td6 = document.createElement('td');
-      td6.setAttribute('data-label', 'Actions');
-
-      const actionWrapper = document.createElement('div');
-      actionWrapper.className = 'action-wrapper';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'action-wrapper';
 
       const delBtn = document.createElement('button');
       delBtn.textContent = 'Delete';
@@ -45,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         loadRecipes();
       };
 
-      actionWrapper.appendChild(delBtn);
-      td6.appendChild(actionWrapper);
+      wrapper.appendChild(delBtn);
+      tdActions.appendChild(wrapper);
+      tr.appendChild(tdActions);
 
-      tr.append(td1, td2, td3, td4, td5, td6);
       tableBody.appendChild(tr);
     });
   };
