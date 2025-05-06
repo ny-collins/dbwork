@@ -310,6 +310,8 @@ You’ll find key packages like:
 - mongoose
 - dotenv
 - nodemon (for dev mode)
+- cors
+- mongodb
 
 To install all required packages:
 ```bash
